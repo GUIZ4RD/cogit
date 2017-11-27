@@ -132,7 +132,7 @@ An example of brain.json from Hi Coach:
 
 
 In the examples above:
-- __CONTEXTS__ are  "base" and "set-time
+- __CONTEXTS__ are  "base" and "set-time, if context are no define for a response it will keep the current context.
 - __PATTERNS__  are "hi coach", "about you", "motivate me" ecc
 - __PATTERNS PLACEHOLDER__ are "IS-STRING" and "DEFAULT", those repleace pattern for particular cases, DEFAULT is the answer for unmatched patterns, IS-STRING and IS-INT are used to handle variables.
 - __ACTION__ are functions defined in functions.py they will be executed before sending the response, you can create conditional responses based on the result, if "id" is true the function will receive the user id as input.
