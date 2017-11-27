@@ -1,0 +1,31 @@
+{
+	"revision": "1.0",
+
+	"base": {
+		"DEFAULT": {
+			"text": "Mmmm, this look weird :/",
+			"buttons": [
+				["hi", "about you"]
+			]
+		},
+
+		"hi": {
+				"text": "Hi dude"
+				},
+
+		"how are you":
+		{
+				"action": "getMood",
+				"result": {
+				"ARRAY": {
+					"template": "I am $MOOD"
+		}
+	}
+},
+
+
+		"about you": {
+			"text": "Hello there, I am your brand new bot"
+		}
+	}
+}

@@ -1,0 +1,151 @@
+{	
+"start-training": 
+  {
+		"create a plan": 
+    {
+          "action": "initUser",
+          "id": true,
+          "result": 
+          {
+            	"ok": 
+              {
+					        "text": "I need some basic information to create the perfect training plan for you, how old are you ?",
+					        "context": "set-age"
+				      },
+                "error": {
+                  "text": "I've got a little problem now, please retry later.",
+                  "context": "base"
+				  }
+
+          }
+			}
+},
+
+"set-age": {
+    "IS-INT":{
+			"action": "setUserAge",
+			"id": true,
+			"result": {
+				"ok": 
+        {
+					"text": "What is your current physical condition ?",
+          "choose": [
+				      ["Out of shape"],
+				      ["Pretty good"],
+              ["I'm a superhero"]
+			    ],
+					"context": "set-fitness"
+				},
+				"error": {
+					"text": "Please insert a valid age",
+					"context": "set-age"
+				}
+			}
+		  }
+  },
+
+"set-fitness": {
+    "IS-STRING":
+    {
+			"action": "setUserFitness",
+			"id": true,
+			"result": {
+				"ok": 
+        {
+					"text": "How many time at week do you want to workout ?",
+           "choose": [
+				      ["2"],
+				      ["3"],
+              ["4"],
+             ["5"]
+			    ],
+					"context": "set-days"
+				},
+				"error": {
+					"text": "Please choose between the options",
+          "choose": [
+				      ["Out of shape"],
+				      ["Pretty good"],
+              ["I'm a superhero"]
+			    ],
+					"context": "set-fitness"
+				}
+			}
+    }	  
+  },
+  
+  "set-days": {
+    "IS-INT":
+    {
+			"action": "setUserDays",
+			"id": true,
+			"result": {
+				"ok": 
+        {
+					"text": "Okay, we can start with your first workout, do you want to do it now ?",
+          "choose": [
+				      ["Yes coach"],
+				      ["I'll do it later"]
+			    ],
+
+					"context": "start-test"
+				},
+				"error": {
+					"text": "Sorry I don't understand, how many time at week do you want to workout ?",
+          "choose": [
+				      ["2"],
+				      ["3"],
+              ["4"],
+             ["5"]
+			    ],
+					"context": "set-days"
+				},
+        "few": {
+          "text": "You have to workout at least 2 days at week, how many time at week do you want to workout ?",
+           "choose": [
+				      ["2"],
+				      ["3"],
+              ["4"],
+             ["5"]
+			    ],
+					"context": "set-days"
+        },
+         "much": {
+          "text": "You can't workout for more than 5 days at week, how many time at week do you want to workout ?",
+           "choose": [
+				      ["2"],
+				      ["3"],
+              ["4"],
+             ["5"]
+			    ],
+					"context": "set-days"
+        }
+			}
+    }	  
+  },
+  
+  "start-test":
+  {
+    "yes coach":
+    {
+      "action": "getWorkout",
+			"id": true,
+			"result": {
+				"ok": 
+        {
+       "text":"Okay let's start with your first workout, complete as many rounds as possible and try to reduce the rest time as much as possible, but always listen to your body, stop if you feel any kind of discomfort",
+       "context":"show-workout",
+      "choose": [
+        ["start"]
+      ]
+    }
+    }
+    },
+    
+    "i'll do it later":
+    {
+       "text":"Okay, I'm here 24h for you, came back when you want to workout",
+       "context":"base"
+    }
+  }  
+}
